@@ -1,0 +1,159 @@
+{
+	"info": {
+		"_postman_id": "42994632-0c7ae65e-2c4c-41f2-b4d5-e266f1103dbc",
+		"name": "Flights API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GEt all flights",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6dfc7cd9-2e71-462b-987f-ce86c8ee54e4",
+						"exec": [
+							"// Basic status code test",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// Response body exists",
+							"pm.test(\"Response body is not empty\", function () {",
+							"    pm.response.to.have.body;",
+							"});",
+							"",
+							"// Check response is JSON",
+							"pm.test(\"Response is JSON\", function () {",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"// Validate response structure",
+							"pm.test(\"Response has expected properties\", function () {",
+							"    const jsonData = pm.response.json();",
+							"    ",
+							"    // Check that the response has Airline and Class properties",
+							"    pm.expect(jsonData).to.have.property('Airline');",
+							"    pm.expect(jsonData).to.have.property('Class');",
+							"});",
+							"",
+							"// Validate data types",
+							"pm.test(\"Response properties have correct data types\", function () {",
+							"    const jsonData = pm.response.json();",
+							"    ",
+							"    // Airline should be a string or number",
+							"    pm.expect(jsonData.Airline).to.be.a('string').or.a('number');",
+							"    ",
+							"    // Class should be a string",
+							"    pm.expect(jsonData.Class).to.be.a('string');",
+							"});",
+							"",
+							"// Optional: Specific content validation (adjust as needed)",
+							"pm.test(\"Class is a valid flight class\", function () {",
+							"    const jsonData = pm.response.json();",
+							"    const validClasses = ['First Class', 'Business Class', 'Economy Class'];",
+							"    ",
+							"    pm.expect(validClasses).to.include(jsonData.Class);",
+							"});",
+							"",
+							"// Response time test",
+							"pm.test(\"Response time is less than 500ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "42994632-2b005a72-653d-4126-826c-f2265be2f0a5",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/api/flights",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"api",
+						"flights"
+					]
+				},
+				"description": "## Get All Flights Endpoint\n\n### Overview\nThis endpoint retrieves a list of available flights from the Flights API.\n\n### Request Details\n- **Method:** GET\n- **Endpoint:** `{{baseurl}}/api/flights`\n- **Authentication:** No authentication required (based on current configuration)\n\n### Response Structure\nThe endpoint returns a JSON object with the following properties:\n- `Airline` (string/number): The name or identifier of the airline\n- `Class` (string): The flight class category\n\n#### Possible Flight Classes\n- First Class\n- Business Class\n- Economy Class\n\n### Response Example\n```json\n{\n    \"Airline\": \"33243 Nicolas Union\",\n    \"Class\": \"First Class\"\n}\n```\n\n### Response Codes\n- `200 OK`: Successful retrieval of flight information\n- `500 Internal Server Error`: Unexpected server-side error\n\n### Performance Expectations\n- Maximum response time: 500ms\n- Rate limit: 120 requests per time window\n\n### Notes\n- This endpoint provides a basic flight information snapshot\n- The response may vary depending on current flight availability\n- Recommended for quick flight class and airline information retrieval\n\n### Potential Use Cases\n- Flight information display\n- Preliminary flight selection\n- Quick airline and class verification"
+			},
+			"response": [
+				{
+					"id": "42994632-36f74336-ffea-480b-901a-6d01d75d51d7",
+					"name": "GEt all flights",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/api/flights",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"api",
+								"flights"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [
+						{
+							"expires": "Invalid Date"
+						}
+					],
+					"responseTime": null,
+					"body": "{\n    \"Airline\":{{$randomStreetAddress}},\n    \"Class\":\"First Class\"\n}"
+				}
+			]
+		},
+		{
+			"name": "{{baseurl}}/api/flights",
+			"id": "42994632-3ae49569-4ac4-4de6-821d-ef16dac8dcff",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/api/flights",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"api",
+						"flights"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "baseurl",
+			"value": "https://355d4343-5eab-49c0-aab7-7b429321b06f.mock.pstmn.io",
+			"type": "default"
+		}
+	]
+}
