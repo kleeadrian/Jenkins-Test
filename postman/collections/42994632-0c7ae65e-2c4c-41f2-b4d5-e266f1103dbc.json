@@ -75,13 +75,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseurl}}/api/flights",
+					"raw": "{{baseurl}}/api/flights/v3",
 					"host": [
 						"{{baseurl}}"
 					],
 					"path": [
 						"api",
-						"flights"
+						"flights",
+						"v3"
 					]
 				},
 				"description": "## Get All Flights Endpoint\n\n### Overview\nThis endpoint retrieves a list of available flights from the Flights API.\n\n### Request Details\n- **Method:** GET\n- **Endpoint:** `{{baseurl}}/api/flights`\n- **Authentication:** No authentication required (based on current configuration)\n\n### Response Structure\nThe endpoint returns a JSON object with the following properties:\n- `Airline` (string/number): The name or identifier of the airline\n- `Class` (string): The flight class category\n\n#### Possible Flight Classes\n- First Class\n- Business Class\n- Economy Class\n\n### Response Example\n```json\n{\n    \"Airline\": \"33243 Nicolas Union\",\n    \"Class\": \"First Class\"\n}\n```\n\n### Response Codes\n- `200 OK`: Successful retrieval of flight information\n- `500 Internal Server Error`: Unexpected server-side error\n\n### Performance Expectations\n- Maximum response time: 500ms\n- Rate limit: 120 requests per time window\n\n### Notes\n- This endpoint provides a basic flight information snapshot\n- The response may vary depending on current flight availability\n- Recommended for quick flight class and airline information retrieval\n\n### Potential Use Cases\n- Flight information display\n- Preliminary flight selection\n- Quick airline and class verification"
